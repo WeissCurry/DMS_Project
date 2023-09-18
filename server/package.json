@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "This is Challenge Gold and deadline last Chapter 8",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WeissCurry/DMS_Project.git"
+  },
+  "keywords": [
+    "Challenge-Gold"
+  ],
+  "author": "Maul",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WeissCurry/DMS_Project/issues"
+  },
+  "homepage": "https://github.com/WeissCurry/DMS_Project#readme"
+}
