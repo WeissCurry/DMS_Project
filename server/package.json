@@ -4,6 +4,7 @@
   "description": "This is Challenge Gold and deadline last Chapter 8",
   "main": "app.js",
   "scripts": {
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/WeissCurry/DMS_Project/issues"
   },
-  "homepage": "https://github.com/WeissCurry/DMS_Project#readme"
+  "homepage": "https://github.com/WeissCurry/DMS_Project#readme",
+  "dependencies": {
+    "colors": "^1.4.0"
+  }
 }
