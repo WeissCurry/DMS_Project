@@ -1,21 +1,41 @@
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 3000;
+const routes = require('./routes/index')
 
-let colors = require("colors")
-let result = colors.bgCyan("Halo")
+//middleware
+app.use(express.json()) // for parsing application/json
+app.use(express.urlencoded({ extended: false })) // for parsing application/x-www-form-urlencoded
 
-let namaUcup = "haiiiii"
-console.log(result)
-console.log(namaUcup.bgYellow);
-console.log(namaUcup.bold.red);
+app.set('view engine', 'ejs');
 
-console.log("");
-console.log("INI TULISAN NGEGGAS".bold.red);
+//ke routes 
+app.use(routes)
 
-console.log("ucup surucup".strikethrough.grey);
+// //middleware error yg lain 
+// //not found
+app.use((req, res, next) => {
+    const error = new Error('Not Found');
+    error.status = 404;
+    next(error);
+})
 
-const ereyY = ["ucup", "ucup", "ucup", "ucup", "ucup"]
 
-for (let i = 0; i < ereyY.length; i++) {
-    console.log(ereyY[i].bold);
-    console.log(ereyY[i].strip);
-    console.log(ereyY[i].stripColors.bgWhite);
+// //middlewre error handler
+const errorMiddleware = (err, req, res, next) => {
+
+    res.status(500 || err.status)
+    res.send({
+        error : {
+            status : 500 || err.status,
+            message : "internal server error" || err.message
+        }
+    })
 }
+app.use(errorMiddleware)
+
+//nyalain servernya
+app.listen(PORT, () => {
+    console.log(`I love you ${PORT}!!`);
+    console.log(`http://localhost:${PORT}`);
+});
