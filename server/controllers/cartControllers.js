@@ -3,7 +3,7 @@ let self = module.exports = {
         const { Pasien_Ygbeli, Obat_Dibeli, Jumlah } = req.body;
 
         // Ambil harga dan jumlah stok dari tabel "Obat" berdasarkan id tertentu
-        const obatInfo = await query.select('Obat', { id_Obat: Obat_Dibeli });
+        const obatInfo = await query.select('Obat', { id: Obat_Dibeli });
 
         if (obatInfo.length === 0) {
             res.status(404).json("Obat tidak ditemukan");
@@ -23,8 +23,32 @@ let self = module.exports = {
                 }
                 
                 await query.insert('Cart', insertCart);
-                res.status(200).json(insertCart);
+                // res.status(200).json(insertCart);
+                res.redirect('/home/cart')
             }
         }
-    }
+    }, 
+    cartView : async function (req, res) {
+        let allData = await query.selectAll('Cart', '*')
+        console.log(allData)
+        res.render('cartPage', {allData})
+    },
+    cartViewInput : async function (req, res) {
+        res.render('inputCartPage')
+    },
+    delete : async function (req, res) {
+        const deleteById = req.params.id
+        console.log("MASOEK DELETE");
+
+        const selectData = await query.select('Cart', {id:deleteById})
+
+        if (!selectData || selectData.length === 0) {
+            res.status(400).json("CART SIAPA IKI!?")
+        } else {
+            // Tabelnya apa, Columnya dimana 
+            await query.delete('Cart', {id:deleteById})
+            // res.status(200).json("Data berhasil dihapus!");
+            res.redirect('/home/cart')
+        }
+    },
 }

@@ -8,31 +8,31 @@ exports.seed = async function(knex) {
   await knex('Role').insert([
     {
       Username: "Cahyadi",
-      Password: "*******",
+      Password: "12345678",
       Role: "Admin",
       id: 1,
     },
     {
       Username: "Ucup",
-      Password: "*******",
+      Password: "12345678",
       Role: "Admin",
       id: 2,
     },
     {
       Username: "Saiful",
-      Password: "*******",
+      Password: "12345678",
       Role: "Admin",
       id: 3,
     },
     {
       Username: "Sarah",
-      Password: "*******",
+      Password: "12345678",
       Role: "SuperAdmin",
       id:  4,
     },
     {
       Username: "Udin",
-      Password: "*******",
+      Password: "12345678",
       Role: "SuperAdmin",
       id:  5,
     },

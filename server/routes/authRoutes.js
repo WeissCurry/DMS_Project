@@ -8,6 +8,7 @@ const authController = require('../controllers/authControllers')
 //     res.render('register')
 // })
 routes.post('/register', authController.register)
+routes.get('/register', authController.registerView)
 
 
 /* LOGIN */
@@ -17,6 +18,8 @@ routes.post('/register', authController.register)
 //     // res.render("../client/vies/loginPage")
 // })
 routes.post('/login', authController.login)
+routes.get('/login', authController.loginView)
+
 
 
 

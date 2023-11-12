@@ -1,6 +1,9 @@
 const Chart = require('chart.js');
 
 let self = module.exports = {
+    homeView : async function(req, res) {
+        res.render('homePage')
+    },
     diagramBatang: async function (req, res) {
 
         // Ambil data dari database (contoh pengambilan data)
@@ -71,7 +74,4 @@ let self = module.exports = {
             data: response,
         });
     },
-    dashboardView : async function (req, res) {
-        res.render('dashboardPage')
-    }
-};
+}

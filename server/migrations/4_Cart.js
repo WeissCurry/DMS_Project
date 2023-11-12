@@ -4,7 +4,8 @@
  */
 exports.up = function(knex) {
     return knex.schema.createTable("Cart", (table) => {
-        table.increments("id_Cart").primary().unsigned(); // untuk buat ID
+        table.increments("id").primary().unsigned(); // untuk buat ID
+        table.string("Tanggal_Beli").defaultTo(knex.fn.now());
         table.integer("Jumlah")
         table.integer("Total")
         table.integer("Obat_Dibeli").unsigned().references("id").inTable("Obat")

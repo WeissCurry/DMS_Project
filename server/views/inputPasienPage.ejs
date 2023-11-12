@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Input Pasien Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body class="bg-success-subtle">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-success">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="/home">APOTEK</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link text-white-50" href="/home/pasien/view">Data Pasien</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home/cart">Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home/katalog/view">Katalog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/login">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card" style="margin-bottom: 10px;">
+                    <div class="card-body">
+                        <form action="/home/pasien/" method="post">
+                            <h3 class="mb-4">Insert Pasien</h3>
+                            <div class="mb-3">
+                                <label for="Nama" class="form-label">Nama Pasien</label>
+                                <input type="text" class="form-control" id="Nama" name="Nama" placeholder="Nama Pasien" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="TTL" class="form-label">Tempat Tanggal Lahir</label>
+                                <input type="date" class="form-control" id="TTL" name="TTL" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="Nomer_Telefon" class="form-label">No. Telefon</label>
+                                <input type="tel" class="form-control" id="Nomer_Telefon" name="Nomer_Telefon" placeholder="No. Telefon" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="Jenis_Kelamin" class="form-label">Jenis Kelamin</label>
+                                <select class="form-select" id="Jenis_Kelamin" name="Jenis_Kelamin" required>
+                                    <option value="Laki-laki">Laki-laki</option>
+                                    <option value="Perempuan">Perempuan</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="Alamat_Lengkap" class="form-label">Alamat</label>
+                                <input type="text" class="form-control" id="Alamat_Lengkap" name="Alamat_Lengkap" placeholder="Alamat" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="Diagnosis" class="form-label">Diagnosis</label>
+                                <input type="text" class="form-control" id="Diagnosis" name="Diagnosis" placeholder="Diagnosis" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="Obat_Diberikan" class="form-label">Obat yang Diberikan</label>
+                                <input type="number" class="form-control" id="Obat_Diberikan" name="Obat_Diberikan" placeholder="Obat yang Diberikan" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="Dokter_Diagnosa" class="form-label">Dokter Diagnosa</label>
+                                <input type="number" class="form-control" id="Dokter_Diagnosa" name="Dokter_Diagnosa" placeholder="Dokter Diagnosa" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Input Pasien</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+</body>
+</html>

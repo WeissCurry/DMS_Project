@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-success-subtle">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-success">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="/home">APOTEK</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home/pasien/view">Data Pasien</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home/cart">Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home/katalog/view">Katalog Obat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/login">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card h-100" style="width: auto;">
+                    <div class="card-body">
+                        <h2 class="card-title">Stock Obat</h2>
+                        <canvas id="obatChart" width="400" height="400"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100" style="width: auto;">
+                    <div class="card-body">
+                        <h2 class="card-title">Dominasi Obat</h2>
+                        <canvas id="obatPieChart" width="400" height="400"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100" style="width: auto;">
+                    <div class="card-body">
+                        <h2 class="card-title">Tabel Obat</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nama</th>
+                                    <th scope="col">Stock</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabelObatBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (optional, if you want to use Bootstrap features like collapse) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        fetch('/home/katalog') 
+            .then(response => response.json())
+            .then(data => {
+                const labels = data.map(item => item.Nama);
+                const stockValues = data.map(item => item.Stock);
+
+                // DIAGRAM BATANG
+                const ctx = document.getElementById('obatChart').getContext('2d');
+                const obatChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Stock',
+                            data: stockValues,
+                            backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1,
+                        }],
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                            },
+                        },
+                    },
+                });
+
+                // DIAGRAM PIE
+                const ctxPie = document.getElementById('obatPieChart').getContext('2d');
+                const obatPieChart = new Chart(ctxPie, {
+                    type: 'pie',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            data: stockValues,
+                            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50'],
+                            borderColor: '#fff',
+                            borderWidth: 1,
+                        }],
+                    },
+                });
+                // TABEL OBAT
+                const tabelObatBody = document.getElementById('tabelObatBody');
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td>${item.Nama}</td><td>${item.Stock}</td>`;
+                    tabelObatBody.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    </script>
+</body>
+</html>

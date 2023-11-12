@@ -6,7 +6,9 @@ let self = module.exports = {
         const selectById = req.params.id
         console.log(selectById, "<==== SELECTBYID");
         let allData = await query.select('Pasien', {Nomor_RM:selectById})
-        res.status(200).json(allData)
+        // res.status(200).json(allData)
+        res.redirect('/home/pasien/view')
+
     },
     selectAll : async function (req, res) {
         console.log("MASOEK SELECTALL");
@@ -20,7 +22,8 @@ let self = module.exports = {
             Alamat_Lengkap, Diagnosis, Obat_Diberikan, Dokter_Diagnosa} = req.body
 
             console.log("MASOEK INSERT");
-            
+            console.log(Nama, "<===DOKTER DIAGNOSA");
+
         const insertDataPasien = {
             Nama : Nama, 
             TTL : TTL, 
@@ -33,7 +36,9 @@ let self = module.exports = {
         }
         
         await query.insert('Pasien', insertDataPasien)
-        res.status(200).json("Register Pasien Berhasil")
+        // res.status(200).json("Register Pasien Berhasil")
+        res.redirect('/home/pasien/view')
+
         
     },
     update: async function(req, res) {
@@ -47,7 +52,9 @@ let self = module.exports = {
             res.status(404).json("Data Pasien dengan Nomor_RM tersebut tidak ditemukan.");
         } else {
             await query.update('Pasien', { Obat_Diberikan: Obat_Diberikan }, { Nomor_RM: paramsPasien });
-            res.status(200).json("Update Pasien Berhasil");
+            // res.status(200).json("Update Pasien Berhasil");
+            res.redirect('/home/pasien/view')
+
         }   
     },
     
@@ -62,7 +69,16 @@ let self = module.exports = {
         } else {
             // Tabelnya apa, Columnya dimana 
             await query.delete('Pasien', {Nomor_RM:deleteById});
-            res.status(200).json("Data berhasil dihapus!");
+            // res.status(200).json("Data berhasil dihapus!");
+            res.redirect('/home/pasien/view')
         }
     },
+    pasienView : async function (req, res) {
+        let allData = await query.selectAll('Pasien', '*')
+        console.log(allData)
+        res.render('pasienPage', {allData})
+    },
+    pasienViewInput : async function (req, res) {
+        res.render('inputPasienPage')
+    }
 }

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pasien Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+</head>
+<body class="bg-success-subtle">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-success">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="/home">PASIEN</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link text-white-50" href="/home/pasien/formPasien">Input Pasien</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home/cart">Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home/katalog/view">Katalog Obat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/login">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2>Data Display</h2>
+
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nama</th>
+                        <th scope="col">Tanggal Lahir</th>
+                        <th scope="col">Nomer Telefon</th>
+                        <th scope="col">Jenis Kelamin</th>
+                        <th scope="col">Alamat lengkap</th>
+                        <th scope="col">Obat yang diberikan</th>
+                        <th scope="col">Dokter Pengampu</th>
+                        <th scope="col">Diagnosis</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dynamic data block -->
+                    <% allData.forEach(item => { %>
+                        <tr>
+                            <td><%= item.Nomor_RM %></td>
+                            <td><%= item.Nama %></td>
+                            <td><%= item.TTL %></td>
+                            <td><%= item.Nomer_Telefon %></td>
+                            <td><%= item.Jenis_Kelamin %></td>
+                            <td><%= item.Alamat_Lengkap %></td>
+                            <td><%= item.Obat_Diberikan%></td>
+                            <td><%= item.Dokter_Diagnosa %></td>
+                            <td><%= item.Diagnosis %></td>
+                            <td>
+                                <div class="d-flex">
+                                    <form action="/home/pasien/<%= item.Nomor_RM %>?_method=DELETE" method="POST">
+                                        <button type="submit" class="btn btn-danger me-2">Delete</button>
+                                    </form>
+                                    <form action="/home/pasien/<%= item.Nomor_RM %>?_method=PUT" method="POST">
+                                        <div class="d-flex">
+                                            <input type="number" class="form-control" placeholder="Obat yg diberikan" id="Obat_Diberikan" name="Obat_Diberikan">
+                                            <button type="submit" class="btn btn-info">Update</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</body>
+</html>
