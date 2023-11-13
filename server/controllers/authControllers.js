@@ -1,5 +1,4 @@
 const bcrypt = require('bcrypt');
-// const query = require('query-library'); // Pastikan modul ini diimport dan diinisialisasi dengan benar
 
 let self = module.exports = {
   login: async function (req, res) {
@@ -55,7 +54,7 @@ let self = module.exports = {
         const hashedPassword = await bcrypt.hash(Password, 10);
         const insertRoleData = {
           Username: Username,
-          Password: hashedPassword, // Gunakan password yang sudah di-hash
+          Password: hashedPassword, // menggunakan password yang sudah di-hash
           Role: Role,
         };
         await query.insert("Role", insertRoleData);

@@ -22,6 +22,12 @@ let self = module.exports = {
                     Total : Total
                 }
                 
+                /*
+                return await database
+                .select('users.*', 'rooms.Room_name')
+                .from('users')
+                .leftJoin('rooms', 'users.Room_id', 'rooms.id').where('users.roles', 'User');
+                */
                 await query.insert('Cart', insertCart);
                 // res.status(200).json(insertCart);
                 res.redirect('/home/cart')

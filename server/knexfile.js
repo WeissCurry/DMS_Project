@@ -1,4 +1,4 @@
-require('dotenv').config(); // Load konfigurasi dari file .env
+require('dotenv').config(); // Lupa dihapoessss
 
 module.exports = {
   development: {
