@@ -2,5 +2,4 @@
 >bismillah bisa!
 list Bug :
 - Passport
-- Bcrypt
-- katalog Berubah urutan saat Stock dirubah
+- katalog Berubah urutan, saat Stock dirubah

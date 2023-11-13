@@ -42,7 +42,7 @@ let self = module.exports = {
                 Dosis: Dosis,
                 Aturan_Pakai: Aturan_Pakai,
                 Jenis_Obat: Jenis_Obat,
-                Gambar: Gambar,
+                Gambar: Gambar.path,
             };
             
             console.log("Insert Data Obat: ");
@@ -53,20 +53,26 @@ let self = module.exports = {
         }
     },
     update: async function (req, res) {
-        const updateDataObat = req.body;
-        const id = req.params.id; // Menggunakan id yang akan diubah
-    
+        const { Stock } = req.body; 
+        const id = req.params.id; 
+
         console.log("MASOEK UPDATE");
         const selectData = await query.select('Obat', { id: id });
     
         if (selectData.length === 0) {
             res.status(404).json("Data dengan ID Obat tersebut tidak ditemukan.");
         } else {
-            await query.update('Obat', updateDataObat, { id: id });
-            // res.status(200).json("Data berhasil diubah!");
-            res.redirect('/home/katalog/view')
-        }
+            const currentStock = selectData[0].Stock;
+            const updatedStock = parseInt(currentStock) + parseInt(Stock); 
     
+            const updateDataObat = {
+            ...req.body,
+            Stock: updatedStock,
+            };
+    
+            await query.update('Obat', updateDataObat, { id: id });
+            res.redirect('/home/katalog/view');
+        }
     },
     delete : async function (req, res) {
         const deleteById = req.params.id
